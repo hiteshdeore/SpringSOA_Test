@@ -1,0 +1,6 @@
+/* Trigger  */
+
+Trigger CountContTrigger On Contact (after insert,after Delete,After Undelete){
+if(Trigger.isAfter){
+if(Trigger.isInsert||Trigger.isUndelete||Trigger.isDelete){
+CountContHandler.Countcont(Trigger.New,Trigger.Old);}}}

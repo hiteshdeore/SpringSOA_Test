@@ -1,0 +1,33 @@
+/* Handler Class /*
+public class CountContHandler {
+public static void Countcont(List<contact>NewContacts,List<contacts>OldContacts){
+
+/* Creating Set of Ids for Collecting AccountIds From New and old contacts */
+
+Set <id> AccIds= New Set <id>();
+
+/* iterating through new and old contact list and adding Account ids to AccIds set */
+
+if (NewContacts!=null){
+for (Contact Ncon:NewContacts){
+if(Ncon.AccountId!=null){
+AccIds.add(Ncon.AccountId);}}}
+
+if (OldContacts!=null){
+for (Contact Ocon:NewContacts){
+if(Ocon.AccountId!=null){
+AccIds.add(Ocon.AccountId);}}}
+
+/* Fetching Account Where Id is from AccIds Set */
+
+List <Account> Accounts= [SELECT id, Number_Of_Contact__c (select id from contacts) FROM Account WHERE Id IN:AccIds];
+
+/* Iterating Through List Accounts for Count of contacts */
+if (!Accounts.isEmpty()){
+for (Account Acc:Accounts){
+Acc.Number_Of_Contact__c=Acc.Contacts.Size();
+}
+Accounts.add(Acc);
+}
+Update Accounts; }
+}
